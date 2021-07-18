@@ -11,7 +11,18 @@ import SwiftUI
 struct TaskyApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabView {
+                ToDoView()
+                    .tabItem {
+                        Image(systemName: "checklist")
+                        Text("ToDo")
+                    }
+                DoneView()
+                    .tabItem {
+                        Image(systemName: "checkmark.circle")
+                        Text("Done")
+                    }
+            }
         }
     }
 }
