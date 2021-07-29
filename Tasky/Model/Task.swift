@@ -11,7 +11,7 @@ class Task: Identifiable {
     let id: Int
     let description: String
     let date: Date
-    let status: TaskStatus
+    var status: TaskStatus
     
     init(id: Int, description: String, date: Date, status: TaskStatus) {
         self.id = id

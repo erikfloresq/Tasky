@@ -9,6 +9,9 @@ import SwiftUI
 
 @main
 struct TaskyApp: App {
+    @StateObject var toDoViewModel = ToDoViewModel()
+    @StateObject var doneViewModel = DoneViewModel()
+    
     var body: some Scene {
         WindowGroup {
             TabView {
@@ -17,11 +20,14 @@ struct TaskyApp: App {
                         Image(systemName: "checklist")
                         Text("ToDo")
                     }
+                    .environmentObject(toDoViewModel)
+                    .environmentObject(doneViewModel)
                 DoneView()
                     .tabItem {
                         Image(systemName: "checkmark.circle")
                         Text("Done")
                     }
+                    .environmentObject(doneViewModel)
             }
         }
     }

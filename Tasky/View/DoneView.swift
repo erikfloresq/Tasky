@@ -8,11 +8,15 @@
 import SwiftUI
 
 struct DoneView: View {
+    @EnvironmentObject var doneViewModel: DoneViewModel
+    
     var body: some View {
         NavigationView {
             List {
-                Text("Win design awards")
-            }.navigationTitle("5 tasks done ✅")
+                ForEach(doneViewModel.doneTask) { task in
+                    Text(task.description)
+                }
+            }.navigationTitle("\(doneViewModel.getTotalDoneTask()) tasks done ✅")
         }
     }
 }

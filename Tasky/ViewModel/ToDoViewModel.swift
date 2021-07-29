@@ -20,9 +20,13 @@ class ToDoViewModel: ObservableObject {
 // MARK: - ToDo
 
 extension ToDoViewModel {
-    func addToDoTask(description: String) {
+    func addNewToDoTask(description: String) {
         let newTask = Task(id: getIdForNewElement(), description: description, date: Date.now, status: .todo)
         toDoTasks.append(newTask)
+    }
+    
+    func addOldToDoTask(_ task: Task) {
+        toDoTasks.append(task)
     }
     
     func removeToDoTask(_ task: Task) {
@@ -37,7 +41,23 @@ extension ToDoViewModel {
 
 extension ToDoViewModel {
     func addDoingTask(_ task: Task) {
-        doingTasks.append(task)
+        let newDoingTask = task
+        newDoingTask.status = .doing
+        doingTasks.append(newDoingTask)
         removeToDoTask(task)
+    }
+    
+    func removeDoingTask(_ task: Task) {
+        guard let index = doingTasks.firstIndex(where: { $0 === task }) else {
+            return
+        }
+        doingTasks.remove(at: index)
+    }
+    
+    func stopDoingTask(_ task: Task) {
+        let oldTask = task
+        oldTask.status = .todo
+        removeDoingTask(oldTask)
+        addOldToDoTask(oldTask)
     }
 }

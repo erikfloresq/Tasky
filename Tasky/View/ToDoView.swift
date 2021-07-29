@@ -10,8 +10,8 @@ import SwiftUI
 struct ToDoView: View {
     @State private var presentedNewTaskView: Bool = false
     @State private var newTaskDescription: String = ""
-    @StateObject var toDoViewModel: ToDoViewModel = ToDoViewModel()
-
+    @EnvironmentObject var toDoViewModel: ToDoViewModel
+    @EnvironmentObject var doneViewModel: DoneViewModel
 
     var body: some View {
         NavigationView {
@@ -21,7 +21,7 @@ struct ToDoView: View {
                         Text(task.description)
                             .swipeActions(edge: .leading) {
                                 Button {
-
+                                    toDoViewModel.stopDoingTask(task)
                                 } label: {
                                     Label("Stop Doing", systemImage: "stop")
                                 }
@@ -29,7 +29,8 @@ struct ToDoView: View {
                             }
                             .swipeActions(edge: .trailing) {
                                 Button {
-
+                                    doneViewModel.addDoneTask(task)
+                                    toDoViewModel.removeDoingTask(task)
                                 } label: {
                                     Label("Done", systemImage: "checkmark")
                                 }
@@ -85,7 +86,7 @@ struct ToDoView: View {
         } label: {
             Image(systemName: "plus")
         }.sheet(isPresented: $presentedNewTaskView) {
-            toDoViewModel.addToDoTask(description: newTaskDescription)
+            toDoViewModel.addNewToDoTask(description: newTaskDescription)
         } content: {
             NewTaskView(taskDescription: $newTaskDescription)
         }
