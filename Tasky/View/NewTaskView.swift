@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct NewTaskView: View {
-    @State private var taskDescription: String = ""
+    @Binding var taskDescription: String
+    @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
         NavigationView {
@@ -27,12 +28,15 @@ struct NewTaskView: View {
             .padding()
             .navigationBarItems(trailing: doneButton)
             .navigationTitle("New Task")
+            .onAppear {
+                taskDescription = ""
+            }
         }
     }
 
     var doneButton: some View {
         Button {
-            print("")
+            self.presentationMode.wrappedValue.dismiss()
         } label: {
             Text("Done")
         }
@@ -41,6 +45,6 @@ struct NewTaskView: View {
 
 struct NewTaskView_Previews: PreviewProvider {
     static var previews: some View {
-        NewTaskView()
+        NewTaskView(taskDescription: .constant(""))
     }
 }

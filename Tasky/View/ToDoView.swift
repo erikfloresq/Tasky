@@ -7,35 +7,17 @@
 
 import SwiftUI
 
-enum TaskStatus {
-    case todo
-    case doing
-    case done
-}
-
-struct Task: Identifiable {
-    let id: Int
-    let description: String
-    let date: Date
-    let status: TaskStatus
-}
-
 struct ToDoView: View {
     @State private var presentedNewTaskView: Bool = false
-    @State private var doingTasks: [Task] = [
-        //Task(id: 0, description: "doing 1", date: Date.now, status: .doing)
-    ]
-    @State private var toDoTasks: [Task] = [
-        Task(id: 1, description: "todo 1", date: Date.now, status: .todo),
-        Task(id: 0, description: "todo 0", date: Date.now, status: .todo)
-    ]
+    @State private var newTaskDescription: String = ""
+    @StateObject var toDoViewModel: ToDoViewModel = ToDoViewModel()
 
 
     var body: some View {
         NavigationView {
             List {
                 Section("Doing") {
-                    ForEach(doingTasks) { task in
+                    ForEach(toDoViewModel.doingTasks) { task in
                         Text(task.description)
                             .swipeActions(edge: .leading) {
                                 Button {
@@ -56,11 +38,11 @@ struct ToDoView: View {
                     }
                 }
                 Section("Tasks") {
-                    ForEach(toDoTasks) { task in
+                    ForEach(toDoViewModel.toDoTasks) { task in
                         Text(task.description)
                             .swipeActions(edge: .leading) {
                                 Button {
-
+                                    toDoViewModel.removeToDoTask(task)
                                 } label: {
                                     Label("Nevermind", systemImage: "trash")
                                 }
@@ -68,9 +50,7 @@ struct ToDoView: View {
                             }
                             .swipeActions(edge: .trailing) {
                                 Button {
-                                    self.doingTasks.append(
-                                        Task(id: 2, description: "doing 2", date: Date.now, status: .doing)
-                                    )
+                                    toDoViewModel.addDoingTask(task)
                                 } label: {
                                     Label("Doing", systemImage: "wrench.and.screwdriver")
                                 }
@@ -104,11 +84,11 @@ struct ToDoView: View {
             presentedNewTaskView.toggle()
         } label: {
             Image(systemName: "plus")
-        }.sheet(isPresented: $presentedNewTaskView,
-                onDismiss: nil) {
-            NewTaskView()
+        }.sheet(isPresented: $presentedNewTaskView) {
+            toDoViewModel.addToDoTask(description: newTaskDescription)
+        } content: {
+            NewTaskView(taskDescription: $newTaskDescription)
         }
-
     }
 }
 
