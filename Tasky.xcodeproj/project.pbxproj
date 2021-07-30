@@ -17,6 +17,9 @@
 		08FD5F4E26B2521A00C1B0C6 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FD5F4D26B2521A00C1B0C6 /* Task.swift */; };
 		08FD5F5026B2522C00C1B0C6 /* TaskStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FD5F4F26B2522C00C1B0C6 /* TaskStatus.swift */; };
 		08FD5F5626B2E85100C1B0C6 /* DoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FD5F5526B2E85100C1B0C6 /* DoneViewModel.swift */; };
+		08FD5F5C26B334B900C1B0C6 /* Tasky.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 08FD5F5A26B334B900C1B0C6 /* Tasky.xcdatamodeld */; };
+		08FD5F5F26B3394600C1B0C6 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FD5F5E26B3394600C1B0C6 /* CoreDataManager.swift */; };
+		08FD5F6126B36C9100C1B0C6 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FD5F6026B36C9100C1B0C6 /* PersistenceManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +34,9 @@
 		08FD5F4D26B2521A00C1B0C6 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		08FD5F4F26B2522C00C1B0C6 /* TaskStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStatus.swift; sourceTree = "<group>"; };
 		08FD5F5526B2E85100C1B0C6 /* DoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneViewModel.swift; sourceTree = "<group>"; };
+		08FD5F5B26B334B900C1B0C6 /* Tasky.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Tasky.xcdatamodel; sourceTree = "<group>"; };
+		08FD5F5E26B3394600C1B0C6 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		08FD5F6026B36C9100C1B0C6 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +69,7 @@
 		085D4C4226A4403B00194DD4 /* Tasky */ = {
 			isa = PBXGroup;
 			children = (
+				08FD5F5D26B3392800C1B0C6 /* CoreData */,
 				08FD5F4C26B251A900C1B0C6 /* Model */,
 				08FD5F4926B247C200C1B0C6 /* ViewModel */,
 				085D4C5126A4410600194DD4 /* View */,
@@ -107,6 +114,16 @@
 				08FD5F4F26B2522C00C1B0C6 /* TaskStatus.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		08FD5F5D26B3392800C1B0C6 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				08FD5F5A26B334B900C1B0C6 /* Tasky.xcdatamodeld */,
+				08FD5F5E26B3394600C1B0C6 /* CoreDataManager.swift */,
+				08FD5F6026B36C9100C1B0C6 /* PersistenceManager.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,6 +204,9 @@
 				085D4C4426A4403B00194DD4 /* TaskyApp.swift in Sources */,
 				08FD5F4E26B2521A00C1B0C6 /* Task.swift in Sources */,
 				085D4C5326A4411A00194DD4 /* DoneView.swift in Sources */,
+				08FD5F5F26B3394600C1B0C6 /* CoreDataManager.swift in Sources */,
+				08FD5F6126B36C9100C1B0C6 /* PersistenceManager.swift in Sources */,
+				08FD5F5C26B334B900C1B0C6 /* Tasky.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,6 +411,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		08FD5F5A26B334B900C1B0C6 /* Tasky.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				08FD5F5B26B334B900C1B0C6 /* Tasky.xcdatamodel */,
+			);
+			currentVersion = 08FD5F5B26B334B900C1B0C6 /* Tasky.xcdatamodel */;
+			path = Tasky.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 085D4C3826A4403B00194DD4 /* Project object */;
 }

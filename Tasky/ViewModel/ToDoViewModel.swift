@@ -11,6 +11,11 @@ import Foundation
 class ToDoViewModel: ObservableObject {
     @Published var doingTasks: [Task] = []
     @Published var toDoTasks: [Task] = []
+    let storage: CoreDataManager
+    
+    init(storage: CoreDataManager) {
+        self.storage = storage
+    }
     
     func getIdForNewElement() -> Int {
         return toDoTasks.count + 1
@@ -21,8 +26,14 @@ class ToDoViewModel: ObservableObject {
 
 extension ToDoViewModel {
     func addNewToDoTask(description: String) {
-        let newTask = Task(id: getIdForNewElement(), description: description, date: Date.now, status: .todo)
+        guard !description.isEmpty else {
+            return
+        }
+        let newTask = Task(description: description, status: .todo)
         toDoTasks.append(newTask)
+        
+        // core data
+        
     }
     
     func addOldToDoTask(_ task: Task) {

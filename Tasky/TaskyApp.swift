@@ -9,8 +9,18 @@ import SwiftUI
 
 @main
 struct TaskyApp: App {
-    @StateObject var toDoViewModel = ToDoViewModel()
+    @StateObject var toDoViewModel: ToDoViewModel
     @StateObject var doneViewModel = DoneViewModel()
+    let persistenceManager: PersistenceManager
+    
+    init() {
+        let manager = PersistenceManager()
+        self.persistenceManager = manager
+        
+        let managedObjectContext = manager.persistentContainer.viewContext
+        let storage = CoreDataManager(managedObjectContext: managedObjectContext)
+        self._toDoViewModel = StateObject(wrappedValue: ToDoViewModel(storage: storage))
+    }
     
     var body: some Scene {
         WindowGroup {

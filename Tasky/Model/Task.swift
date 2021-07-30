@@ -8,15 +8,11 @@
 import Foundation
 
 class Task: Identifiable {
-    let id: Int
     let description: String
-    let date: Date
     var status: TaskStatus
     
-    init(id: Int, description: String, date: Date, status: TaskStatus) {
-        self.id = id
+    init(description: String, status: TaskStatus) {
         self.description = description
-        self.date = date
         self.status = status
     }
 }

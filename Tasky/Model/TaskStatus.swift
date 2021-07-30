@@ -7,7 +7,18 @@
 
 import Foundation
 
-enum TaskStatus {
+extension TaskMO {
+    var taskStatus: TaskStatus {
+        get {
+            return TaskStatus(rawValue: self.status!)!
+        }
+        set {
+            self.status = newValue.rawValue
+        }
+    }
+}
+
+enum TaskStatus: String {
     case todo
     case doing
     case done
