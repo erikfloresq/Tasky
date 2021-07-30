@@ -14,7 +14,7 @@ struct DoneView: View {
         NavigationView {
             List {
                 ForEach(doneViewModel.doneTask) { task in
-                    Text(task.description)
+                    Text(task.descriptionTask ?? "")
                 }
             }.navigationTitle("\(doneViewModel.getTotalDoneTask()) tasks done ✅")
         }

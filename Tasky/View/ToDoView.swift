@@ -18,7 +18,7 @@ struct ToDoView: View {
             List {
                 Section("Doing") {
                     ForEach(toDoViewModel.doingTasks) { task in
-                        Text(task.description)
+                        Text(task.descriptionTask ?? "")
                             .swipeActions(edge: .leading) {
                                 Button {
                                     toDoViewModel.stopDoingTask(task)
@@ -40,7 +40,7 @@ struct ToDoView: View {
                 }
                 Section("Tasks") {
                     ForEach(toDoViewModel.toDoTasks) { task in
-                        Text(task.description)
+                        Text(task.descriptionTask ?? "")
                             .swipeActions(edge: .leading) {
                                 Button {
                                     toDoViewModel.removeToDoTask(task)

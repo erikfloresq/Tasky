@@ -9,12 +9,14 @@ import Combine
 import Foundation
 
 class ToDoViewModel: ObservableObject {
-    @Published var doingTasks: [Task] = []
-    @Published var toDoTasks: [Task] = []
-    let storage: CoreDataManager
+    @Published var doingTasks: [TaskMO] = []
+    @Published var toDoTasks: [TaskMO] = []
+    let storage: PersistenceManager
     
-    init(storage: CoreDataManager) {
+    init(storage: PersistenceManager) {
         self.storage = storage
+        doingTasks = fetch(status: .doing)
+        toDoTasks = fetch(status: .todo)
     }
     
     func getIdForNewElement() -> Int {
@@ -25,50 +27,38 @@ class ToDoViewModel: ObservableObject {
 // MARK: - ToDo
 
 extension ToDoViewModel {
+    
+    func fetch(status: TaskStatus) -> [TaskMO] {
+        return storage.tasks.filter({ $0.taskStatus == status })
+    }
+    
     func addNewToDoTask(description: String) {
         guard !description.isEmpty else {
             return
         }
-        let newTask = Task(description: description, status: .todo)
-        toDoTasks.append(newTask)
-        
-        // core data
+        storage.addTask(description: description, status: .todo)
+        toDoTasks = storage.tasks
+    }
+    
+    func addOldToDoTask(_ task: TaskMO) {
         
     }
     
-    func addOldToDoTask(_ task: Task) {
-        toDoTasks.append(task)
-    }
-    
-    func removeToDoTask(_ task: Task) {
-        guard let index = toDoTasks.firstIndex(where: { $0 === task }) else {
-            return
-        }
-        toDoTasks.remove(at: index)
+    func removeToDoTask(_ task: TaskMO) {
     }
 }
 
 // MARK: - Doing
 
 extension ToDoViewModel {
-    func addDoingTask(_ task: Task) {
-        let newDoingTask = task
-        newDoingTask.status = .doing
-        doingTasks.append(newDoingTask)
-        removeToDoTask(task)
+    func addDoingTask(_ task: TaskMO) {
+        task.taskStatus = .doing
+        doingTasks = fetch(status: .doing)
     }
     
-    func removeDoingTask(_ task: Task) {
-        guard let index = doingTasks.firstIndex(where: { $0 === task }) else {
-            return
-        }
-        doingTasks.remove(at: index)
+    func removeDoingTask(_ task: TaskMO) {
     }
     
-    func stopDoingTask(_ task: Task) {
-        let oldTask = task
-        oldTask.status = .todo
-        removeDoingTask(oldTask)
-        addOldToDoTask(oldTask)
+    func stopDoingTask(_ task: TaskMO) {
     }
 }

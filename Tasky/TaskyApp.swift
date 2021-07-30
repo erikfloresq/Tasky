@@ -11,14 +11,14 @@ import SwiftUI
 struct TaskyApp: App {
     @StateObject var toDoViewModel: ToDoViewModel
     @StateObject var doneViewModel = DoneViewModel()
-    let persistenceManager: PersistenceManager
+    let persistenceManager: CoreDataStack
     
     init() {
-        let manager = PersistenceManager()
+        let manager = CoreDataStack()
         self.persistenceManager = manager
         
         let managedObjectContext = manager.persistentContainer.viewContext
-        let storage = CoreDataManager(managedObjectContext: managedObjectContext)
+        let storage = PersistenceManager(managedObjectContext: managedObjectContext)
         self._toDoViewModel = StateObject(wrappedValue: ToDoViewModel(storage: storage))
     }
     

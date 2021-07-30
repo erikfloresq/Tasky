@@ -8,13 +8,13 @@
 import Foundation
 
 class DoneViewModel: ObservableObject {
-    @Published var doneTask: [Task] = []
+    @Published var doneTask: [TaskMO] = []
     
     func getTotalDoneTask() -> Int {
         return doneTask.count
     }
     
-    func addDoneTask(_ task: Task) {
-        doneTask.append(task)
+    func addDoneTask(_ task: TaskMO) {
+        
     }
 }

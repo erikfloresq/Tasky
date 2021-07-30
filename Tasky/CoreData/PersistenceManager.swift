@@ -7,28 +7,47 @@
 
 import Foundation
 import CoreData
-import UIKit
 
-class PersistenceManager {
-    let persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "Tasky")
-        container.loadPersistentStores { _, error in
-            if let error = error as NSError? {
-                fatalError("oh no we have an error \(error), \(error.userInfo)")
-            }
-        }
-        return container
-    }()
+class PersistenceManager: NSObject, ObservableObject {
+    @Published var tasks: [TaskMO] = []
+    private let taskFetchController: NSFetchedResultsController<TaskMO>
+    let managedObjectContext: NSManagedObjectContext
     
-    init() {
-        let center = NotificationCenter.default
-        let notification = UIApplication.willResignActiveNotification
+    init(managedObjectContext: NSManagedObjectContext) {
+        self.managedObjectContext = managedObjectContext
+        taskFetchController = NSFetchedResultsController(fetchRequest: TaskMO.fetchRequest(), managedObjectContext: managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+        super.init()
+        taskFetchController.delegate = self
         
-        center.addObserver(forName: notification, object: nil, queue: nil) { [weak self] _ in
-            guard let self = self else { return }
-            if self.persistentContainer.viewContext.hasChanges {
-                try? self.persistentContainer.viewContext.save()
-            }
+        do {
+            try taskFetchController.performFetch()
+            tasks = taskFetchController.fetchedObjects ?? []
+        } catch {
+            print("failed to fetch items!")
         }
+    }
+    
+    func addTask(description: String, status: TaskStatus) {
+        let taskMO = TaskMO(context: managedObjectContext)
+        taskMO.id = Int32(tasks.count)
+        taskMO.taskStatus = status
+        taskMO.date = Date.now
+        taskMO.descriptionTask = description
+        
+        do {
+            try managedObjectContext.save()
+        } catch (let error) {
+            print("Error when try to save a task \(error)")
+        }
+    }
+    
+}
+
+extension PersistenceManager: NSFetchedResultsControllerDelegate {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        guard let tasksFetched = controller.fetchedObjects as? [TaskMO] else {
+            return
+        }
+        tasks = tasksFetched
     }
 }
