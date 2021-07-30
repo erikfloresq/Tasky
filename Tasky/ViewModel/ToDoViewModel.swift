@@ -32,19 +32,23 @@ extension ToDoViewModel {
         return storage.tasks.filter({ $0.taskStatus == status })
     }
     
+    func update() {
+        doingTasks = fetch(status: .doing)
+        toDoTasks = fetch(status: .todo)
+        storage.save()
+    }
+    
     func addNewToDoTask(description: String) {
         guard !description.isEmpty else {
             return
         }
         storage.addTask(description: description, status: .todo)
-        toDoTasks = storage.tasks
-    }
-    
-    func addOldToDoTask(_ task: TaskMO) {
-        
+        update()
     }
     
     func removeToDoTask(_ task: TaskMO) {
+        storage.remove(task)
+        update()
     }
 }
 
@@ -53,12 +57,16 @@ extension ToDoViewModel {
 extension ToDoViewModel {
     func addDoingTask(_ task: TaskMO) {
         task.taskStatus = .doing
-        doingTasks = fetch(status: .doing)
+        update()
     }
     
     func removeDoingTask(_ task: TaskMO) {
+        task.taskStatus = .done
+        update()
     }
     
     func stopDoingTask(_ task: TaskMO) {
+        task.taskStatus = .todo
+        update()
     }
 }
