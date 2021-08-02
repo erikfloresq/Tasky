@@ -33,6 +33,13 @@ struct TaskyApp: App {
                     }
                     .environmentObject(toDoViewModel)
                     .environmentObject(doneViewModel)
+                DoingView()
+                    .tabItem {
+                        Image(systemName: "hand.thumbsup")
+                        Text("Doing")
+                    }
+                    .environmentObject(toDoViewModel)
+                    .environmentObject(doneViewModel)
                 DoneView()
                     .tabItem {
                         Image(systemName: "checkmark.circle")
