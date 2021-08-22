@@ -6,7 +6,6 @@
 //
 
 import Foundation
-
 class DoneViewModel: ObservableObject {
     @Published var doneTask: [TaskMO] = []
     
@@ -26,6 +25,7 @@ class DoneViewModel: ObservableObject {
     }
     
     func addDoneTask(_ task: TaskMO) {
+        task.taskStatus = .done
         doneTask = fetch(status: .done)
         storage.log()
     }

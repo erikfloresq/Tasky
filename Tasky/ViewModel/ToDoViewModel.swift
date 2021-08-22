@@ -9,14 +9,14 @@ import Combine
 import Foundation
 
 class ToDoViewModel: ObservableObject {
-    @Published var doingTasks: [TaskMO] = []
     @Published var toDoTasks: [TaskMO] = []
+    @Published var doingTasks: [TaskMO] = []
     let storage: PersistenceManager
     
     init(storage: PersistenceManager) {
         self.storage = storage
-        doingTasks = fetch(status: .doing)
         toDoTasks = fetch(status: .todo)
+        doingTasks = fetch(status: .doing)
     }
     
     func getIdForNewElement() -> Int {
