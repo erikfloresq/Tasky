@@ -34,7 +34,9 @@ struct DoingView: View {
                             .tint(Color(.systemGreen))
                         }
                 }
-            }.navigationTitle("Doing 🤖")
+            }
+            .animation(.spring(), value: doingViewModel.doingTasks)
+            .navigationTitle("Doing 🤖")
         }
     }
 }

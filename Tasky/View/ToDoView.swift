@@ -37,6 +37,7 @@ struct ToDoView: View {
                         }
                 }
             }
+            .animation(.spring(), value: toDoViewModel.toDoTasks)
             .navigationBarItems(trailing: newTaskButton)
             .navigationTitle("ToDo 📓")
         }

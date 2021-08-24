@@ -16,7 +16,9 @@ struct DoneView: View {
                 ForEach(doneViewModel.doneTask) { task in
                     Text(task.descriptionTask ?? "")
                 }
-            }.navigationTitle("\(doneViewModel.getTotalDoneTask()) tasks done ✅")
+            }
+            .animation(.spring(), value: doneViewModel.doneTask)
+            .navigationTitle("\(doneViewModel.getTotalDoneTask()) tasks done ✅")
         }
     }
 }
