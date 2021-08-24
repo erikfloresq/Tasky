@@ -56,7 +56,10 @@ class PersistenceManager: NSObject, ObservableObject {
         let fetchRequest = TaskMO.fetchRequest()
         let allResult = try? managedObjectContext.fetch(fetchRequest)
         for entity in allResult ?? [] {
-            print("🤖 \(entity.id) \(entity.descriptionTask) \(entity.status) ")
+            let id = entity.id
+            let descriptionTask = entity.descriptionTask  ?? ""
+            let status = entity.status ?? ""
+            print("🤖 \(id) \(descriptionTask) \(status) ")
         }
     }
     

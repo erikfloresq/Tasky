@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct DoingView: View {
-    @EnvironmentObject var toDoViewModel: ToDoViewModel
+    @EnvironmentObject var doingViewModel: DoingViewModel
     @EnvironmentObject var doneViewModel: DoneViewModel
     
     var body: some View {
         NavigationView {
             List {
-                ForEach(toDoViewModel.doingTasks) { task in
+                ForEach(doingViewModel.doingTasks) { task in
                     Text(task.descriptionTask ?? "")
                         .swipeActions(edge: .leading) {
                             Button {
-                                toDoViewModel.stopDoingTask(task)
+                                doingViewModel.stopDoingTask(task)
                             } label: {
                                 Label("Stop Doing", systemImage: "stop")
                             }
@@ -27,7 +27,7 @@ struct DoingView: View {
                         .swipeActions(edge: .trailing) {
                             Button {
                                 doneViewModel.addDoneTask(task)
-                                toDoViewModel.removeDoingTask(task)
+                                doingViewModel.removeDoingTask(task)
                             } label: {
                                 Label("Done", systemImage: "checkmark")
                             }

@@ -11,6 +11,7 @@ import SwiftUI
 struct TaskyApp: App {
     @StateObject var toDoViewModel: ToDoViewModel
     @StateObject var doneViewModel: DoneViewModel
+    @StateObject var doingViewModel: DoingViewModel
     let persistenceManager: CoreDataStack
     
     init() {
@@ -20,6 +21,7 @@ struct TaskyApp: App {
         let managedObjectContext = manager.persistentContainer.viewContext
         let storage = PersistenceManager(managedObjectContext: managedObjectContext)
         self._toDoViewModel = StateObject(wrappedValue: ToDoViewModel(storage: storage))
+        self._doingViewModel = StateObject(wrappedValue: DoingViewModel(storage: storage))
         self._doneViewModel = StateObject(wrappedValue: DoneViewModel(storage: storage))
     }
     
@@ -32,13 +34,13 @@ struct TaskyApp: App {
                         Text("ToDo")
                     }
                     .environmentObject(toDoViewModel)
-                    .environmentObject(doneViewModel)
+                    .environmentObject(doingViewModel)
                 DoingView()
                     .tabItem {
                         Image(systemName: "hand.thumbsup")
                         Text("Doing")
                     }
-                    .environmentObject(toDoViewModel)
+                    .environmentObject(doingViewModel)
                     .environmentObject(doneViewModel)
                 DoneView()
                     .tabItem {

@@ -16,7 +16,6 @@
 		087BDEAB26B793610009C973 /* DoingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087BDEAA26B793610009C973 /* DoingView.swift */; };
 		087BDEAD26B794810009C973 /* DoingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087BDEAC26B794810009C973 /* DoingViewModel.swift */; };
 		08B2D57C26B43D2C004E3820 /* TaskMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B2D57A26B43D2C004E3820 /* TaskMO+CoreDataClass.swift */; };
-		08B2D57D26B43D2C004E3820 /* TaskMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B2D57B26B43D2C004E3820 /* TaskMO+CoreDataProperties.swift */; };
 		08FD5F4B26B247D500C1B0C6 /* ToDoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FD5F4A26B247D500C1B0C6 /* ToDoViewModel.swift */; };
 		08FD5F5026B2522C00C1B0C6 /* TaskStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FD5F4F26B2522C00C1B0C6 /* TaskStatus.swift */; };
 		08FD5F5626B2E85100C1B0C6 /* DoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FD5F5526B2E85100C1B0C6 /* DoneViewModel.swift */; };
@@ -36,7 +35,6 @@
 		087BDEAA26B793610009C973 /* DoingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoingView.swift; sourceTree = "<group>"; };
 		087BDEAC26B794810009C973 /* DoingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoingViewModel.swift; sourceTree = "<group>"; };
 		08B2D57A26B43D2C004E3820 /* TaskMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskMO+CoreDataClass.swift"; sourceTree = "<group>"; };
-		08B2D57B26B43D2C004E3820 /* TaskMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		08FD5F4A26B247D500C1B0C6 /* ToDoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoViewModel.swift; sourceTree = "<group>"; };
 		08FD5F4F26B2522C00C1B0C6 /* TaskStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStatus.swift; sourceTree = "<group>"; };
 		08FD5F5526B2E85100C1B0C6 /* DoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneViewModel.swift; sourceTree = "<group>"; };
@@ -130,7 +128,6 @@
 				08FD5F5E26B3394600C1B0C6 /* PersistenceManager.swift */,
 				08FD5F6026B36C9100C1B0C6 /* CoreDataStack.swift */,
 				08B2D57A26B43D2C004E3820 /* TaskMO+CoreDataClass.swift */,
-				08B2D57B26B43D2C004E3820 /* TaskMO+CoreDataProperties.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -210,7 +207,6 @@
 				08FD5F4B26B247D500C1B0C6 /* ToDoViewModel.swift in Sources */,
 				085D4C5526A4440200194DD4 /* NewTaskView.swift in Sources */,
 				085D4C4626A4403B00194DD4 /* ToDoView.swift in Sources */,
-				08B2D57D26B43D2C004E3820 /* TaskMO+CoreDataProperties.swift in Sources */,
 				08B2D57C26B43D2C004E3820 /* TaskMO+CoreDataClass.swift in Sources */,
 				08FD5F5026B2522C00C1B0C6 /* TaskStatus.swift in Sources */,
 				085D4C4426A4403B00194DD4 /* TaskyApp.swift in Sources */,

@@ -8,7 +8,6 @@
 import Foundation
 class DoneViewModel: ObservableObject {
     @Published var doneTask: [TaskMO] = []
-    
     let storage: PersistenceManager
     
     init(storage: PersistenceManager) {

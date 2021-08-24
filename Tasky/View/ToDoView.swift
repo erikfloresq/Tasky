@@ -11,6 +11,7 @@ struct ToDoView: View {
     @State private var presentedNewTaskView: Bool = false
     @State private var newTaskDescription: String = ""
     @EnvironmentObject var toDoViewModel: ToDoViewModel
+    @EnvironmentObject var doingViewModel: DoingViewModel
 
     var body: some View {
         NavigationView {
@@ -27,7 +28,8 @@ struct ToDoView: View {
                         }
                         .swipeActions(edge: .trailing) {
                             Button {
-                                toDoViewModel.addDoingTask(task)
+                                doingViewModel.addDoingTask(task)
+                                toDoViewModel.update()
                             } label: {
                                 Label("Doing", systemImage: "wrench.and.screwdriver")
                             }
