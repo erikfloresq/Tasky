@@ -40,6 +40,7 @@ struct TaskyApp: App {
                         Image(systemName: "hand.thumbsup")
                         Text("Doing")
                     }
+                    .environmentObject(toDoViewModel)
                     .environmentObject(doingViewModel)
                     .environmentObject(doneViewModel)
                 DoneView()

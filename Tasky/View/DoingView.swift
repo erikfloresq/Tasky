@@ -25,6 +25,7 @@ struct DoingView: View {
 }
 
 struct DoingList: View {
+    @EnvironmentObject var toDoViewModel: ToDoViewModel
     @EnvironmentObject var doingViewModel: DoingViewModel
     @EnvironmentObject var doneViewModel: DoneViewModel
 
@@ -35,6 +36,7 @@ struct DoingList: View {
                     .swipeActions(edge: .leading) {
                         Button {
                             doingViewModel.stopDoingTask(task)
+                            toDoViewModel.update()
                         } label: {
                             Label("Stop Doing", systemImage: "stop")
                         }
