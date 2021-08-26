@@ -32,4 +32,14 @@ class DoneViewModel: ObservableObject {
         doneTask = fetch(status: .done)
         storage.log()
     }
+
+    func update() {
+        doneTask = fetch(status: .done)
+        storage.save()
+    }
+
+    func removeDoneTask(_ task: TaskMO) {
+        task.taskStatus = .doing
+        update()
+    }
 }

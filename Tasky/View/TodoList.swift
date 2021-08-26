@@ -30,7 +30,7 @@ struct TodoList: View {
                         } label: {
                             Label("Doing", systemImage: "wrench.and.screwdriver")
                         }
-                        .tint(Color(.systemYellow))
+                        .tint(Color(.systemIndigo))
                     }
             }
         }

@@ -9,11 +9,22 @@ import SwiftUI
 
 struct DoneList: View {
     @EnvironmentObject var doneViewModel: DoneViewModel
+    @EnvironmentObject var doingViewModel: DoingViewModel
 
     var body: some View {
         List {
             ForEach(doneViewModel.doneTask) { task in
                 Text(task.descriptionTask ?? "")
+                    .swipeActions(edge: .leading,
+                                  allowsFullSwipe: false) {
+                        Button {
+                            doneViewModel.removeDoneTask(task)
+                            doingViewModel.update()
+                        } label: {
+                            Label("Stop Doing", systemImage: "arrowshape.turn.up.backward")
+                        }
+                        .tint(Color(.systemOrange))
+                    }
             }
         }
         .animation(.spring(), value: doneViewModel.doneTask)

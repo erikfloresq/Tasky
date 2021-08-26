@@ -21,7 +21,7 @@ struct DoingList: View {
                             doingViewModel.stopDoingTask(task)
                             toDoViewModel.update()
                         } label: {
-                            Label("Stop Doing", systemImage: "stop")
+                            Label("Stop Doing", systemImage: "arrowshape.turn.up.backward")
                         }
                         .tint(Color(.systemOrange))
                     }

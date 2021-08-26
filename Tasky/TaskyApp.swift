@@ -48,6 +48,7 @@ struct TaskyApp: App {
                         Image(systemName: "checkmark.circle")
                         Text("Done")
                     }
+                    .environmentObject(doingViewModel)
                     .environmentObject(doneViewModel)
             }
         }
