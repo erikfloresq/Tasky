@@ -14,26 +14,13 @@ struct DoneView: View {
         NavigationView {
             Group {
                 if doneViewModel.isDoneListIsEmpty {
-                    EmptyView(placeHolderText: "You haven't done any task 😆")
+                    EmptyView(placeHolderText: "You haven't done any task ")
                 } else {
                     DoneList()
                 }
             }
             .navigationTitle("\(doneViewModel.getTotalDoneTask()) tasks done ✅")
         }
-    }
-}
-
-struct DoneList: View {
-    @EnvironmentObject var doneViewModel: DoneViewModel
-
-    var body: some View {
-        List {
-            ForEach(doneViewModel.doneTask) { task in
-                Text(task.descriptionTask ?? "")
-            }
-        }
-        .animation(.spring(), value: doneViewModel.doneTask)
     }
 }
 

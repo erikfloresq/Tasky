@@ -39,37 +39,6 @@ struct ToDoView: View {
     }
 }
 
-struct TodoList: View {
-    @EnvironmentObject var toDoViewModel: ToDoViewModel
-    @EnvironmentObject var doingViewModel: DoingViewModel
-
-    var body: some View {
-        List {
-            ForEach(toDoViewModel.toDoTasks) { task in
-                Text(task.descriptionTask ?? "")
-                    .swipeActions(edge: .leading) {
-                        Button {
-                            toDoViewModel.removeToDoTask(task)
-                        } label: {
-                            Label("Nevermind", systemImage: "trash")
-                        }
-                        .tint(Color(.systemRed))
-                    }
-                    .swipeActions(edge: .trailing) {
-                        Button {
-                            doingViewModel.addDoingTask(task)
-                            toDoViewModel.update()
-                        } label: {
-                            Label("Doing", systemImage: "wrench.and.screwdriver")
-                        }
-                        .tint(Color(.systemYellow))
-                    }
-            }
-        }
-        .animation(.spring(), value: toDoViewModel.toDoTasks)
-    }
-}
-
 struct ToDoView_Previews: PreviewProvider {
     static var previews: some View {
         ToDoView()
