@@ -20,6 +20,10 @@ class DoingViewModel: ObservableObject {
         return storage.tasks.filter({ $0.taskStatus == status })
     }
 
+    var isDoingListIsEmpty: Bool {
+        doingTasks.isEmpty
+    }
+
     func update() {
         doingTasks = fetch(status: .doing)
         storage.save()

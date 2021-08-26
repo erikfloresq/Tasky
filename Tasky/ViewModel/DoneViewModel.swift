@@ -16,11 +16,15 @@ class DoneViewModel: ObservableObject {
     }
     
     func fetch(status: TaskStatus) -> [TaskMO] {
-        return storage.tasks.filter({ $0.taskStatus == status })
+        storage.tasks.filter({ $0.taskStatus == status })
+    }
+
+    var isDoneListIsEmpty: Bool {
+        doneTask.isEmpty
     }
     
     func getTotalDoneTask() -> Int {
-        return doneTask.count
+        doneTask.count
     }
     
     func addDoneTask(_ task: TaskMO) {

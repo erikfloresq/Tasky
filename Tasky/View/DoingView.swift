@@ -9,35 +9,49 @@ import SwiftUI
 
 struct DoingView: View {
     @EnvironmentObject var doingViewModel: DoingViewModel
-    @EnvironmentObject var doneViewModel: DoneViewModel
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(doingViewModel.doingTasks) { task in
-                    Text(task.descriptionTask ?? "")
-                        .swipeActions(edge: .leading) {
-                            Button {
-                                doingViewModel.stopDoingTask(task)
-                            } label: {
-                                Label("Stop Doing", systemImage: "stop")
-                            }
-                            .tint(Color(.systemOrange))
-                        }
-                        .swipeActions(edge: .trailing) {
-                            Button {
-                                doneViewModel.addDoneTask(task)
-                                doingViewModel.removeDoingTask(task)
-                            } label: {
-                                Label("Done", systemImage: "checkmark")
-                            }
-                            .tint(Color(.systemGreen))
-                        }
+            Group {
+                if doingViewModel.isDoingListIsEmpty {
+                    EmptyView(placeHolderText: "You aren't doing nothing 🙃")
+                } else {
+                    DoingList()
                 }
             }
-            .animation(.spring(), value: doingViewModel.doingTasks)
             .navigationTitle("Doing 🤖")
         }
+    }
+}
+
+struct DoingList: View {
+    @EnvironmentObject var doingViewModel: DoingViewModel
+    @EnvironmentObject var doneViewModel: DoneViewModel
+
+    var body: some View {
+        List {
+            ForEach(doingViewModel.doingTasks) { task in
+                Text(task.descriptionTask ?? "")
+                    .swipeActions(edge: .leading) {
+                        Button {
+                            doingViewModel.stopDoingTask(task)
+                        } label: {
+                            Label("Stop Doing", systemImage: "stop")
+                        }
+                        .tint(Color(.systemOrange))
+                    }
+                    .swipeActions(edge: .trailing) {
+                        Button {
+                            doneViewModel.addDoneTask(task)
+                            doingViewModel.removeDoingTask(task)
+                        } label: {
+                            Label("Done", systemImage: "checkmark")
+                        }
+                        .tint(Color(.systemGreen))
+                    }
+            }
+        }
+        .animation(.spring(), value: doingViewModel.doingTasks)
     }
 }
 

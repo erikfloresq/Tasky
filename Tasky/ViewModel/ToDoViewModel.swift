@@ -16,13 +16,17 @@ class ToDoViewModel: ObservableObject {
         self.storage = storage
         toDoTasks = fetch(status: .todo)
     }
+
+    var isToDoListIsEmpty: Bool {
+        toDoTasks.isEmpty
+    }
     
     func getIdForNewElement() -> Int {
-        return toDoTasks.count + 1
+        toDoTasks.count + 1
     }
 
     func fetch(status: TaskStatus) -> [TaskMO] {
-        return storage.tasks.filter({ $0.taskStatus == status })
+        storage.tasks.filter({ $0.taskStatus == status })
     }
 
     func update() {

@@ -59,7 +59,7 @@ class PersistenceManager: NSObject, ObservableObject {
             let id = entity.id
             let descriptionTask = entity.descriptionTask  ?? ""
             let status = entity.status ?? ""
-            print("🤖 \(id) \(descriptionTask) \(status) ")
+            print("🤖 \(status): \(id) \(descriptionTask)  ")
         }
     }
     
