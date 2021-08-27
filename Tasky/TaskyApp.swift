@@ -27,7 +27,17 @@ struct TaskyApp: App {
     
     var body: some Scene {
         WindowGroup {
-            TabView {
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                iPadLayout
+            } else {
+                iPhoneLayout
+            }
+        }
+    }
+
+    var iPhoneLayout : some View {
+        TabView {
+            NavigationView {
                 ToDoView()
                     .tabItem {
                         Image(systemName: "checklist")
@@ -35,6 +45,8 @@ struct TaskyApp: App {
                     }
                     .environmentObject(toDoViewModel)
                     .environmentObject(doingViewModel)
+            }
+            NavigationView {
                 DoingView()
                     .tabItem {
                         Image(systemName: "hand.thumbsup")
@@ -43,6 +55,8 @@ struct TaskyApp: App {
                     .environmentObject(toDoViewModel)
                     .environmentObject(doingViewModel)
                     .environmentObject(doneViewModel)
+            }
+            NavigationView {
                 DoneView()
                     .tabItem {
                         Image(systemName: "checkmark.circle")
@@ -51,6 +65,39 @@ struct TaskyApp: App {
                     .environmentObject(doingViewModel)
                     .environmentObject(doneViewModel)
             }
+        }
+    }
+
+    var iPadLayout: some View {
+        NavigationView {
+            List {
+                NavigationLink {
+                    ToDoView()
+                        .environmentObject(toDoViewModel)
+                        .environmentObject(doingViewModel)
+                } label: {
+                    Image(systemName: "checklist")
+                    Text("ToDo")
+                }
+                NavigationLink {
+                    DoingView()
+                        .environmentObject(toDoViewModel)
+                        .environmentObject(doingViewModel)
+                        .environmentObject(doneViewModel)
+                } label: {
+                    Image(systemName: "hand.thumbsup")
+                    Text("Doing")
+                }
+                NavigationLink {
+                    DoneView()
+                        .environmentObject(doingViewModel)
+                        .environmentObject(doneViewModel)
+                } label: {
+                    Image(systemName: "checkmark.circle")
+                    Text("Done")
+                }
+            }
+            .navigationTitle("Tasky")
         }
     }
 }

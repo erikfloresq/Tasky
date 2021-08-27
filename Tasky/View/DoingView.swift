@@ -11,16 +11,13 @@ struct DoingView: View {
     @EnvironmentObject var doingViewModel: DoingViewModel
     
     var body: some View {
-        NavigationView {
-            Group {
-                if doingViewModel.isDoingListIsEmpty {
-                    EmptyView(placeHolderText: "You aren't doing nothing 🙃")
-                } else {
-                    DoingList()
-                }
+        Group {
+            if doingViewModel.isDoingListIsEmpty {
+                EmptyView(placeHolderText: "You aren't doing nothing 🙃")
+            } else {
+                DoingList()
             }
-            .navigationTitle("Doing 🤖")
-        }
+        }.navigationTitle("Doing 🤖")
     }
 }
 

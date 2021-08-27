@@ -13,7 +13,6 @@ struct ToDoView: View {
     @EnvironmentObject var toDoViewModel: ToDoViewModel
 
     var body: some View {
-        NavigationView {
             Group {
                 if toDoViewModel.isToDoListIsEmpty {
                     EmptyView(placeHolderText: "You don't have any task 👀")
@@ -23,7 +22,6 @@ struct ToDoView: View {
             }
             .navigationBarItems(trailing: newTaskButton)
             .navigationTitle("ToDo 📓")
-        }
     }
 
     var newTaskButton: some View {
